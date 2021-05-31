@@ -20,16 +20,19 @@ function listado() {
 function agregarLibro() {
     let titulo = document.querySelector('#titulo').value;
     let autor = document.querySelector('#autor').value;
-    let formAgregarNoticia = document.querySelector('#createModal');
+    let formAgregarLibro = document.querySelector('#createModal');
 
-    libros.push({
-        titulo: titulo,
-        autor: autor
-    });
-
-    localStorage.setItem('libros', JSON.stringify(libros));
-    formAgregarNoticia.reset();
-    listado();
+    if(titulo != "" && autor != "" && titulo != null && autor != null && titulo != undefined && autor != undefined){
+        libros.push({
+            titulo: titulo,
+            autor: autor
+        });
+    
+        localStorage.setItem('libros', JSON.stringify(libros));
+        formAgregarLibro.reset();
+        listado();
+    }
+    
 }
 
 function eliminarLibro(index) {
@@ -40,8 +43,6 @@ function eliminarLibro(index) {
         listado()
     }
 }
-
-listado();
 
 let editarLibro = function(){
     let titulo = document.querySelector('#editarTitulo').value;
@@ -65,3 +66,5 @@ function setEditModal(index){
     document.querySelector('#editarTitulo').value = libros[index].titulo;
     document.querySelector('#editarAutor').value = libros[index].autor;
 }
+
+listado();
