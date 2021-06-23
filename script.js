@@ -22,17 +22,19 @@ function agregarLibro() {
     let autor = document.querySelector('#autor').value;
     let formAgregarLibro = document.querySelector('#createModal');
 
-    if(titulo != "" && autor != "" && titulo != null && autor != null && titulo != undefined && autor != undefined){
+    if (titulo != "" && autor != "" && titulo != null && autor != null && titulo != undefined && autor != undefined) {
         libros.push({
             titulo: titulo,
             autor: autor
         });
-    
+
         localStorage.setItem('libros', JSON.stringify(libros));
         formAgregarLibro.reset();
         listado();
+    } else {
+        alert('Complete todos los campos antes de continuar')
     }
-    
+
 }
 
 function eliminarLibro(index) {
@@ -44,22 +46,28 @@ function eliminarLibro(index) {
     }
 }
 
-let editarLibro = function(){
+let editarLibro = function () { debugger
     let titulo = document.querySelector('#editarTitulo').value;
     let autor = document.querySelector('#editarAutor').value;
-
     let index = event.target.dataset.index;
-    libros[index] = {
-        titulo: titulo,
-        autor: autor
+
+    if (titulo != "" && autor != "" && titulo != null && autor != null && titulo != undefined && autor != undefined) {
+        libros[index] = {
+            titulo: titulo,
+            autor: autor
+        }
+
+        localStorage.setItem('libros', JSON.stringify(libros));
+
+        listado();
+    }else{
+        alert('Complete todos los campos antes de continuar')
     }
 
-    localStorage.setItem('libros', JSON.stringify(libros));
-    
-    listado(); 
+
 }
 
-function setEditModal(index){
+function setEditModal(index) { debugger
     let editBtn = document.getElementById("EditBTN");
     editBtn.setAttribute("data-index", index);
 
