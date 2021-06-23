@@ -9,6 +9,7 @@ function listado() {
             <th scope="row">${index}</th>
             <td>${item.titulo}</td>
             <td>${item.autor}</td>
+            <td><img src="${item.imagen}" class="w-25"></img></td>
             <td>
             <button type="button" class="btn btn-danger" onclick="eliminarLibro(${index})">Eiminar</button>
             <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editModal" onclick="setEditModal(${index})">Editar</button>
@@ -20,12 +21,14 @@ function listado() {
 function agregarLibro() {
     let titulo = document.querySelector('#titulo').value;
     let autor = document.querySelector('#autor').value;
+    let imagen = document.querySelector('#Imagen').value;
     let formAgregarLibro = document.querySelector('#createModal');
 
-    if (titulo != "" && autor != "" && titulo != null && autor != null && titulo != undefined && autor != undefined) {
+    if (titulo != "" && autor != "" && titulo != null && autor != null && titulo != undefined && autor != undefined && imagen != "") {
         libros.push({
             titulo: titulo,
-            autor: autor
+            autor: autor,
+            imagen: imagen
         });
 
         localStorage.setItem('libros', JSON.stringify(libros));
@@ -49,12 +52,14 @@ function eliminarLibro(index) {
 let editarLibro = function () { debugger
     let titulo = document.querySelector('#editarTitulo').value;
     let autor = document.querySelector('#editarAutor').value;
+    let imagen = document.querySelector('#editarImagen').value;
     let index = event.target.dataset.index;
 
-    if (titulo != "" && autor != "" && titulo != null && autor != null && titulo != undefined && autor != undefined) {
+    if (titulo != "" && autor != "" && imagen != "" && titulo != null && autor != null && titulo != undefined && autor != undefined) {
         libros[index] = {
             titulo: titulo,
-            autor: autor
+            autor: autor,
+            imagen: imagen
         }
 
         localStorage.setItem('libros', JSON.stringify(libros));
@@ -73,6 +78,7 @@ function setEditModal(index) { debugger
 
     document.querySelector('#editarTitulo').value = libros[index].titulo;
     document.querySelector('#editarAutor').value = libros[index].autor;
+    document.querySelector('#editarImagen').value = tecnologia[index].imagen;
 }
 
 listado();
